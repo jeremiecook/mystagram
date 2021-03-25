@@ -1,14 +1,17 @@
 <template>
-  <div class="slider" :class="show">
-    <splide ref="focus" :options="sliderOptions" @splide:move="onMove">
-      <splide-slide v-for="photo in $page.photos.edges" :key="photo.node.id">
-        <slide :photo="photo" @splide:start="start" />
-      </splide-slide>
-    </splide>
-    <div class="actions">
-      <a class="close" v-on:click="close" href="#">Toutes les photos</a>
+  <ClientOnly>
+    <div class="slider" :class="show">
+      <splide ref="focus" :options="sliderOptions" @splide:move="onMove">
+        <splide-slide v-for="photo in $page.photos.edges" :key="photo.node.id">
+          <slide :photo="photo" />
+        </splide-slide>
+      </splide>
+
+      <div class="actions">
+        <a class="close" v-on:click="close" href="#">Toutes les photos</a>
+      </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <style lang="scss">
@@ -127,6 +130,15 @@ export default {
     };
   },
   components: {
+    // Splide: () =>
+    //   import("@splidejs/vue-splide")
+    //     .then((m) => m.Slide)
+    //     .catch(),
+
+    // SplideSlide: () =>
+    //   import("@splidejs/vue-splide")
+    //     .then((m) => m.SplideSlide)
+    //     .catch(),
     Splide,
     SplideSlide,
     Slide,
@@ -138,7 +150,6 @@ export default {
   },
   mounted() {
     var $this = this;
-
     // If a photo is provided, show the slider
     if (this.start >= 0) {
       this.visible = true;
