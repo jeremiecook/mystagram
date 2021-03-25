@@ -1,0 +1,18 @@
+{
+  "name": "photos",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "@gridsome/source-filesystem": "^0.6.2",
+    "@gridsome/transformer-remark": "^0.6.4",
+    "@splidejs/vue-splide": "^0.3.5",
+    "gridsome": "^0.7.0",
+    "node-sass": "^4.14.1",
+    "normalize.css": "^8.0.1",
+    "sass-loader": "^7.3.1"
+  }
+}
