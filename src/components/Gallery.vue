@@ -1,12 +1,17 @@
 <template>
   <div class="gallery">
-    <a href="#" v-for="photo in photos.edges">
+    <a
+      href="#"
+      v-for="photo in photos.edges"
+      :key="photo.node.id"
+      @click="onClick($event, photo)"
+    >
       <figure>
-        <g-image :src="photo.node.src" alt="" />
+        <g-image :src="photo.node.thumbnail" alt="" />
         <figcaption>
           <div class="informations">
             <div class="location">{{ photo.node.title }}</div>
-            <div class="date">{{ photo.node.date }}</div>
+            <div class="date">{{ photo.node.date | date }}</div>
           </div>
           <div class="exif">
             <ul>
@@ -30,5 +35,11 @@
 <script>
 export default {
   props: ["photos"],
+  methods: {
+    onClick: function (event, photo) {
+      event.preventDefault();
+      this.Events.$emit("showPhoto", photo.node.id);
+    },
+  },
 };
 </script>

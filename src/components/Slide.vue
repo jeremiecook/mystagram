@@ -27,6 +27,8 @@
 </template>
 
 <style lang="scss" scoped>
+$breakpoint: 600px;
+
 .focus {
   position: relative;
   //background: blue;
@@ -66,6 +68,10 @@ figure {
   //   box-shadow: 0 2px 5px rgba(#000, 0.4);
   //   z-index: -1;
   // }
+
+  @media (max-width: $breakpoint) {
+    flex-direction: column;
+  }
 }
 
 img {
@@ -77,11 +83,18 @@ img {
 figcaption {
   background: #fff;
   width: 200px;
-  padding: 1em;
   letter-spacing: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: $breakpoint) {
+    width: 100%;
+  }
+}
+
+.informations {
+  margin: 1em;
 }
 
 .location {
@@ -126,7 +139,6 @@ figcaption {
 }
 
 .date {
-  letter-spacing: 0.1em;
   font-size: 0.9em;
 }
 </style>

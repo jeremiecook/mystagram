@@ -2,16 +2,15 @@
   <Layout>
     <slider :photos="$page.photos" />
 
-    <!--
     <div class="container">
       <gallery :photos="$page.photos" />
-    </div>-->
+    </div>
   </Layout>
 </template>
 
 <page-query>
 query Photo {
-   photos: allPhoto (sortBy: "date", order: DESC) {
+   photos: allPhoto (sort:[{by: "date", order: DESC }, {by: "order", order: DESC}]) {
     edges {
       node {
         id
@@ -32,12 +31,13 @@ import Slider from "~/components/Slider.vue";
 
 export default {
   metaInfo: {
-    title: "Log",
+    title: "Mystagram",
   },
   components: {
     Gallery,
     Slider,
   },
+  methods: {},
 };
 </script>
 

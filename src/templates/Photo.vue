@@ -2,10 +2,9 @@
   <Layout>
     <slider :photos="$page.photos" :start="start" />
 
-    <!--
     <div class="container">
       <gallery :photos="$page.photos" />
-    </div>-->
+    </div>
   </Layout>
 </template>
 
@@ -15,7 +14,7 @@ query($path: String) {
     id
    }
    
-   photos: allPhoto (sortBy: "date", order: DESC) {
+   photos: allPhoto (sort:[{by: "date", order: DESC }, {by: "order", order: DESC}]) {
     edges {
       node {
         id
