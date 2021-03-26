@@ -6,6 +6,7 @@
 
 module.exports = {
   siteName: "Mystagram",
+  icon: "./src/favicon.svg",
   templates: {
     Photo: "/:year/:title/:order/",
   },

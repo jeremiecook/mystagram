@@ -1,17 +1,15 @@
 <template>
-  <ClientOnly>
-    <div class="slider" :class="show">
-      <splide ref="focus" :options="sliderOptions" @splide:move="onMove">
-        <splide-slide v-for="photo in $page.photos.edges" :key="photo.node.id">
-          <slide :photo="photo" />
-        </splide-slide>
-      </splide>
+  <div class="slider" :class="isVisible">
+    <hooper ref="carousel" :settings="sliderOptions" @afterSlide="onMove">
+      <slide v-for="photo in $page.photos.edges" :key="photo.node.id">
+        <focus :photo="photo" />
+      </slide>
+    </hooper>
 
-      <div class="actions">
-        <a class="close" v-on:click="close" href="#">Toutes les photos</a>
-      </div>
+    <div class="actions">
+      <a class="close" @click="close" href="#">Toutes les photos</a>
     </div>
-  </ClientOnly>
+  </div>
 </template>
 
 <style lang="scss">
@@ -32,11 +30,8 @@
   }
 }
 
-.splide {
+.hooper {
   margin: 2em 0;
-}
-
-.splide__list {
   height: 80vh;
 }
 
@@ -102,9 +97,9 @@
 </style>
 
 <script>
-import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Slide from "~/components/Slide.vue";
+import { Hooper, Slide } from "hooper";
+import "hooper/dist/hooper.css";
+import Focus from "~/components/Focus.vue";
 
 export default {
   props: {
@@ -118,33 +113,19 @@ export default {
     return {
       visible: false,
       sliderOptions: {
-        focus: "center",
-        perPage: 2,
-        fixedWidth: "90%",
-        gap: "5%",
-        pagination: false,
-        type: "loop",
-        lazyLoad: "nearby",
-        start: this.start,
+        infiniteScroll: true,
+        wheelControl: false,
+        initialSlide: this.start,
       },
     };
   },
   components: {
-    // Splide: () =>
-    //   import("@splidejs/vue-splide")
-    //     .then((m) => m.Slide)
-    //     .catch(),
-
-    // SplideSlide: () =>
-    //   import("@splidejs/vue-splide")
-    //     .then((m) => m.SplideSlide)
-    //     .catch(),
-    Splide,
-    SplideSlide,
+    Hooper,
     Slide,
+    Focus,
   },
   computed: {
-    show: function () {
+    isVisible: function () {
       return this.visible ? "visible" : "";
     },
   },
@@ -160,18 +141,18 @@ export default {
     });
   },
   methods: {
-    onMove: function (splide, nextIndex) {
+    onMove: function (event) {
       history.pushState(
         {},
-        this.photos.edges[nextIndex].node.title,
-        this.photos.edges[nextIndex].node.path
+        this.photos.edges[event.currentSlide].node.title,
+        this.photos.edges[event.currentSlide].node.path
       );
     },
     go: function (index) {
       this.visible = true;
-      this.$refs.focus.splide.options.speed = 1;
-      this.$refs.focus.splide.go(index, false);
-      this.$refs.focus.splide.options.speed = 400;
+      //this.$refs.carousel.transition = 1;
+      this.$refs.carousel.slideTo(index);
+      //this.$refs.carousel.options.speed = 400;
     },
     // Get index in slider from a photo id
     getIndex: function (id) {
