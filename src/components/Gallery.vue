@@ -8,7 +8,7 @@
     >
       <figure>
         <div class="parallax">
-          <g-image :src="photo.node.thumbnail" alt="" />
+          <g-image :src="photo.node.thumbnail" />
         </div>
         <figcaption>
           <div class="informations">
@@ -19,10 +19,10 @@
             <ul>
               <li class="model">model make</li>
               <li class="lens">LensModel</li>
-              <li><strong>Focale</strong>focale mm</li>
-              <li><strong>Vitesse</strong> exposuretime s</li>
-              <li><strong>Ouverture</strong> f/ fnumber</li>
-              <li><strong>ISO</strong> ISOSpeedRatings</li>
+              <li><strong>Focale</strong>f mm</li>
+              <li><strong>Vitesse</strong>et s</li>
+              <li><strong>Ouverture</strong>f/ fnumber</li>
+              <li><strong>ISO</strong>iso</li>
             </ul>
           </div>
         </figcaption>
@@ -31,10 +31,10 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 figure {
   position: relative;
-  overflow: hidden;
+  //overflow: hidden;
   margin: 0;
 
   &:after {
@@ -51,7 +51,7 @@ figure {
     }
 
     img {
-      transition: 4s linear all;
+      //transition: 4s linear all;
       transform: scale(1);
     }
   }
@@ -94,70 +94,37 @@ figcaption {
 }
 
 img {
-  width: 100%;
-  display: block;
-  //display: none;
-  transition: 0.2s ease all;
-  transform: translateZ(-2px) scale(1.25);
-  //filter: blur(0);
-  position: absolute;
+  // display: block;
+  // transition: 0.2s ease all;
+  // transform: scale(1);
   width: 100%;
   height: 100%;
 }
 
 .parallax {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  will-change: transform;
 }
 </style>
 
 <script>
+import simpleParallax from "simple-parallax-js";
+
 export default {
   props: ["photos"],
-  // created() {
-  //   var $this = this;
-  //   window.addEventListener("scroll", function () {
-  //     $this.parallax();
-  //   });
-  // },
+  mounted() {
+    var images = document.querySelectorAll(".gallery img");
+    new simpleParallax(images, {
+      orientation: "down",
+      scale: 1.3,
+      delay: 0,
+      customWrapper: ".parallax",
+    });
+  },
   methods: {
     onClick: function (event, photo) {
       event.preventDefault();
       this.Events.$emit("showPhoto", photo.node.id);
     },
-
-    // inViewport: function (bounds) {
-    //   return (
-    //     bounds.bottom >= 0 &&
-    //     bounds.top <=
-    //       (window.innerHeight || document.documentElement.clientHeight)
-    //   );
-    // },
-    // parallax: function () {
-    //   var maxShift = 40;
-    //   var $this = this;
-
-    //   document
-    //     .querySelectorAll(".gallery .parallax")
-    //     .forEach(function (image, index) {
-    //       var bounds = image.getBoundingClientRect();
-
-    //       // Visible images only
-    //       if (!$this.inViewport(bounds)) return;
-
-    //       //console.log(bounds.top);
-    //       //console.log(document.documentElement.clientHeight);
-    //       var height = bounds.bottom - bounds.top;
-    //       var positionRatio =
-    //         bounds.top /
-    //         ((window.innerHeight || document.documentElement.clientHeight) +
-    //           height * 2);
-    //       var shift = positionRatio * (maxShift * 2) - maxShift;
-    //       image.style.top = -shift + "px";
-    //     });
-    // },
   },
 };
 </script>

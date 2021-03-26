@@ -116,6 +116,7 @@ export default {
         infiniteScroll: true,
         wheelControl: false,
         initialSlide: this.start,
+        transition: 300,
       },
     };
   },
@@ -150,9 +151,7 @@ export default {
     },
     go: function (index) {
       this.visible = true;
-      //this.$refs.carousel.transition = 1;
       this.$refs.carousel.slideTo(index);
-      //this.$refs.carousel.options.speed = 400;
     },
     // Get index in slider from a photo id
     getIndex: function (id) {
