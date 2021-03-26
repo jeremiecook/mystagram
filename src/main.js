@@ -11,7 +11,7 @@ import DefaultLayout from "~/layouts/Default.vue";
 import moment from "moment";
 moment.updateLocale("fr", {});
 
-export default function(Vue, { Events }) {
+export default function(Vue, {}) {
   // Event bus
   Vue.prototype.Events = new Vue();
 

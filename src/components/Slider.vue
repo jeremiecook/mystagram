@@ -4,6 +4,7 @@
       <slide v-for="photo in $page.photos.edges" :key="photo.node.id">
         <focus :photo="photo" />
       </slide>
+      <navigation slot="hooper-addons"></navigation>
     </hooper>
 
     <div class="actions">
@@ -15,16 +16,20 @@
 <style lang="scss">
 .slider {
   opacity: 0;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
+  transition-delay: 0.5s;
   z-index: -1;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background: #222;
+  //background: #222;
+  background: #ececec;
 
   &.visible {
+    transition: all 0.5s ease;
+    transition-delay: 0;
     opacity: 1;
     z-index: 10;
   }
@@ -35,9 +40,28 @@
   height: 80vh;
 }
 
+.hooper-navigation button {
+  background: #fff;
+  margin: 0 -5em;
+  transition: 0.5s ease all;
+
+  .visible & {
+    margin: 0;
+    transition-delay: 1s;
+  }
+}
+
 .actions {
   text-align: center;
+  opacity: 0;
+  transition: 1s ease all;
+
+  .visible & {
+    opacity: 1;
+    transition-delay: 1s;
+  }
 }
+
 .close {
   color: #111;
   display: inline-block;
@@ -49,7 +73,6 @@
   z-index: 11;
   margin: 0 auto;
   text-decoration: none;
-
   overflow: hidden;
 
   &:hover {
@@ -63,7 +86,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: #efefef;
+    background: #fafafa;
     position: absolute;
     top: 0;
     left: 0;
@@ -97,7 +120,7 @@
 </style>
 
 <script>
-import { Hooper, Slide } from "hooper";
+import { Hooper, Slide, Navigation } from "hooper";
 import "hooper/dist/hooper.css";
 import Focus from "~/components/Focus.vue";
 
@@ -124,6 +147,7 @@ export default {
     Hooper,
     Slide,
     Focus,
+    Navigation,
   },
   computed: {
     isVisible: function () {

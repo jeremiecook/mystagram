@@ -38,6 +38,17 @@ $breakpoint: 600px;
   align-items: center;
   justify-content: center;
   height: 100%;
+  transform: translateY(-10px);
+  opacity: 0;
+
+  transition: all 0.3s ease;
+  transition-delay: 0;
+  .visible & {
+    transition: all 1s ease;
+    transition-delay: 0.5s;
+    transform: translateY(0px);
+    opacity: 1;
+  }
 
   // To fix drag on images
   &:after {
