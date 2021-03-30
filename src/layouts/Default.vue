@@ -10,7 +10,9 @@
         </nav>
       </div>
     </header>
-    <slot />
+    <transition name="fade">
+      <slot />
+    </transition>
     <footer>
       <div class="container">
         Ces photos sont soumises à une licence
@@ -41,4 +43,13 @@ query {
 </static-query>
 
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
 </style>

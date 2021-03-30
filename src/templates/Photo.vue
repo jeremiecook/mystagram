@@ -1,10 +1,6 @@
 <template>
   <Layout>
-    <slider :photos="$page.photos" :start="start" />
-
-    <div class="container">
-      <gallery :photos="$page.photos" />
-    </div>
+    <focus :photo="$page.photo" />
   </Layout>
 </template>
 
@@ -12,6 +8,9 @@
 query($path: String) {
    photo: photo(path: $path) {
     id
+    src (width: 1000)
+    title
+    date (format: "YYYY-MM-DD")
    }
    
    photos: allPhoto (sort:[{by: "date", order: DESC }, {by: "order", order: DESC}]) {
@@ -20,7 +19,6 @@ query($path: String) {
         id
         title
         thumbnail: src (width: 500, height: 500, fit: cover)
-        src (width: 1000)
         date (format: "YYYY-MM-DD")
         path
       }
@@ -29,13 +27,20 @@ query($path: String) {
 }
 </page-query>
 
-<script>
-import Gallery from "~/components/Gallery.vue";
-import Slider from "~/components/Slider.vue";
+<style lang="scss">
+.focus {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+</style>
 
+<script>
+import Focus from "~/components/Focus.vue";
 export default {
   metaInfo: {
-    title: "Log",
+    //title: "Log",
   },
   computed: {
     start: function () {
@@ -44,9 +49,6 @@ export default {
       );
     },
   },
-  components: {
-    Gallery,
-    Slider,
-  },
+  components: { Focus },
 };
 </script>

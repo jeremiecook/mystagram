@@ -1,13 +1,13 @@
 <template>
-  <div class="focus">
+  <div class="focus visible">
     <figure>
       <div>
-        <g-image :src="photo.node.src" width="500" height="500" />
+        <g-image :src="photo.src" width="500" height="500" />
       </div>
       <figcaption>
         <div class="informations">
-          <div class="location">{{ photo.node.title }}</div>
-          <div class="date">{{ photo.node.date | date }}</div>
+          <div class="location">{{ photo.title }}</div>
+          <div class="date">{{ photo.date | date }}</div>
         </div>
         <!--
         <div class="exif">
@@ -38,8 +38,8 @@ $breakpoint: 600px;
   align-items: center;
   justify-content: center;
   height: 100%;
-  transform: translateY(-10px);
-  opacity: 0;
+  //transform: translateY(-10px);
+  //opacity: 0;
 
   transition: all 0.3s ease;
   transition-delay: 0;
@@ -167,6 +167,9 @@ export default {
   props: ["photo"],
   computed: {
     info: function () {},
+  },
+  mounted() {
+    console.log(this.photo);
   },
 };
 </script>

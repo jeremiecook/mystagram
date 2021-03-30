@@ -1,10 +1,9 @@
 <template>
   <div class="gallery">
-    <a
-      href="#"
+    <g-link
+      :to="photo.node.path"
       v-for="photo in photos.edges"
       :key="photo.node.id"
-      @click="onClick($event, photo)"
     >
       <figure>
         <div class="parallax">
@@ -15,19 +14,9 @@
             <div class="location">{{ photo.node.title }}</div>
             <div class="date">{{ photo.node.date | date }}</div>
           </div>
-          <div class="exif">
-            <ul>
-              <li class="model">model make</li>
-              <li class="lens">LensModel</li>
-              <li><strong>Focale</strong>f mm</li>
-              <li><strong>Vitesse</strong>et s</li>
-              <li><strong>Ouverture</strong>f/ fnumber</li>
-              <li><strong>ISO</strong>iso</li>
-            </ul>
-          </div>
         </figcaption>
       </figure>
-    </a>
+    </g-link>
   </div>
 </template>
 

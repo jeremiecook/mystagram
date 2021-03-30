@@ -1,7 +1,5 @@
 <template>
   <Layout>
-    <slider :photos="$page.photos" />
-
     <div class="container">
       <gallery :photos="$page.photos" />
     </div>
@@ -16,7 +14,6 @@ query Photo {
         id
         title
         thumbnail: src (width: 500, height: 500, fit: cover)
-        src (width: 1000)
         date (format: "YYYY-MM-DD")
         path
       }
@@ -27,15 +24,13 @@ query Photo {
 
 <script>
 import Gallery from "~/components/Gallery.vue";
-import Slider from "~/components/Slider.vue";
 
 export default {
   metaInfo: {
-    title: "Mystagram",
+    //title: "Mystagram",
   },
   components: {
     Gallery,
-    Slider,
   },
   methods: {},
 };

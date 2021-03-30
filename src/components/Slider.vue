@@ -1,14 +1,23 @@
 <template>
-  <div class="slider" :class="isVisible">
-    <hooper ref="carousel" :settings="sliderOptions" @afterSlide="onMove">
-      <slide v-for="photo in $page.photos.edges" :key="photo.node.id">
+  <div class="slider visible">
+    <hooper
+      ref="carousel"
+      :settings="sliderOptions"
+      @afterSlide="onMove"
+      :initialSlide="1"
+    >
+      <slide
+        v-for="photo in photosSlider"
+        :key="photo.node.id"
+        :index="photo.node.id"
+      >
         <focus :photo="photo" />
       </slide>
       <navigation slot="hooper-addons"></navigation>
     </hooper>
 
     <div class="actions">
-      <a class="close" @click="close" href="#">Toutes les photos</a>
+      <a class="close" href="/">Toutes les photos</a>
     </div>
   </div>
 </template>
@@ -128,20 +137,28 @@ export default {
   props: {
     photos: Object,
     start: {
-      default: -1,
+      default: 0,
       type: Number,
     },
   },
   data() {
     return {
-      visible: false,
+      index: this.start,
+      preload: 1, // number of photo preload before and after the current one
       sliderOptions: {
-        infiniteScroll: true,
         wheelControl: false,
-        initialSlide: this.start,
         transition: 300,
+        //infiniteScroll: true,
+        // initialSlide: this.start,
       },
     };
+  },
+  computed: {
+    photosSlider: function () {
+      console.log("photosSlider");
+      console.log(this.photos.edges.slice(this.index - 1, this.index + 2));
+      return this.photos.edges.slice(this.index - 1, this.index + 2);
+    },
   },
   components: {
     Hooper,
@@ -149,42 +166,22 @@ export default {
     Focus,
     Navigation,
   },
-  computed: {
-    isVisible: function () {
-      return this.visible ? "visible" : "";
-    },
-  },
-  mounted() {
-    var $this = this;
-    // If a photo is provided, show the slider
-    if (this.start >= 0) {
-      this.visible = true;
-    }
-    // Click on a thumbnail
-    this.Events.$on("showPhoto", function (photo) {
-      $this.go($this.getIndex(photo));
-    });
-  },
+
   methods: {
     onMove: function (event) {
-      history.pushState(
-        {},
-        this.photos.edges[event.currentSlide].node.title,
-        this.photos.edges[event.currentSlide].node.path
-      );
-    },
-    go: function (index) {
-      this.visible = true;
-      this.$refs.carousel.slideTo(index);
-    },
-    // Get index in slider from a photo id
-    getIndex: function (id) {
-      return this.photos.edges.findIndex((photo) => photo.node.id == id);
-    },
-    close: function (e) {
-      e.preventDefault();
-      this.visible = false;
-      history.pushState({}, "", "/");
+      if (1 == event.currentSlide) return;
+      console.log(this.$refs.carousel);
+      this.$refs.carousel.transition = 0;
+      this.index += event.currentSlide - 1;
+      this.$refs.carousel.slideTo(1);
+      this.$refs.carousel.transition = 300;
+      // if (process.isClient) {
+      //   history.pushState(
+      //     {},
+      //     this.photos.edges[this.index].node.title,
+      //     this.photos.edges[this.index].node.path
+      //   );
+      // }
     },
   },
 };
