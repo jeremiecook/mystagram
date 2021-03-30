@@ -1,9 +1,8 @@
 <template>
-  <div class="focus visible">
+  <div class="focus">
     <figure>
-      <div>
-        <g-image :src="photo.src" width="500" height="500" />
-      </div>
+      <img :src="photo.src.src" @load="ready" />
+
       <figcaption>
         <div class="informations">
           <div class="location">{{ photo.title }}</div>
@@ -38,12 +37,13 @@ $breakpoint: 600px;
   align-items: center;
   justify-content: center;
   height: 100%;
-  //transform: translateY(-10px);
-  //opacity: 0;
+  transform: translateY(-10px);
+  opacity: 0;
 
   transition: all 0.3s ease;
   transition-delay: 0;
-  .visible & {
+
+  .ready & {
     transition: all 1s ease;
     transition-delay: 0.5s;
     transform: translateY(0px);
@@ -167,9 +167,16 @@ export default {
   props: ["photo"],
   computed: {
     info: function () {},
+    visible: function () {},
+  },
+  methods: {
+    ready() {
+      console.log("loaded");
+      document.body.classList.add("ready");
+    },
   },
   mounted() {
-    console.log(this.photo);
+    document.body.classList.remove("ready");
   },
 };
 </script>

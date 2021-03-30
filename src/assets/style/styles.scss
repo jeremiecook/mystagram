@@ -11,11 +11,21 @@
 $color-primary: #4865d9;
 $color-dark: var(--color-text);
 
+#app {
+  position: absolute;
+  width: 100vw;
+  height: auto;
+}
+
 body {
   color: var(--color-text);
   background: var(--color-background);
   font-family: var(--font-family);
   letter-spacing: 0.02em;
+
+  &.fullscreen {
+    background: #ececec;
+  }
 }
 
 h1,
@@ -33,7 +43,7 @@ li {
 
 header {
   background: #fff;
-  margin: 0 0 2em;
+  margin: 0 0 1em;
   line-height: 3.5em;
   border-bottom: 1px solid #ededed;
   border-top: 3px solid $color-primary;

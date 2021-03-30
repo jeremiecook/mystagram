@@ -15,10 +15,6 @@
       </slide>
       <navigation slot="hooper-addons"></navigation>
     </hooper>
-
-    <div class="actions">
-      <a class="close" href="/">Toutes les photos</a>
-    </div>
   </div>
 </template>
 
@@ -155,8 +151,8 @@ export default {
   },
   computed: {
     photosSlider: function () {
-      console.log("photosSlider");
-      console.log(this.photos.edges.slice(this.index - 1, this.index + 2));
+      //console.log("photosSlider");
+      //console.log(this.photos.edges.slice(this.index - 1, this.index + 2));
       return this.photos.edges.slice(this.index - 1, this.index + 2);
     },
   },
