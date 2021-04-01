@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="container">
-      <h1>A propos</h1>
+      <h1>À propos</h1>
       <p>
         Toutes les photos de ce site sont soumises à une licence
         <a href="https://creativecommons.org/licenses/by/4.0/deed.fr"

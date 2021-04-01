@@ -5,7 +5,7 @@
         <logo :text="$static.metadata.siteName"></logo>
         <nav class="nav">
           <ul class="menu">
-            <li><g-link class="nav__link" to="/about/">A propos</g-link></li>
+            <li><g-link class="nav__link" to="/about/">À propos</g-link></li>
           </ul>
         </nav>
       </div>

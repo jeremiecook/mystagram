@@ -13,6 +13,8 @@ $height: 3px;
   span {
     display: inline-block;
     animation-duration: 2.5s;
+    transform: tranlateY(0);
+
     //animation-iteration-count: infinite;
     //animation-direction: alternate;
   }
@@ -29,16 +31,16 @@ $height: 3px;
 
 @keyframes wave {
   5% {
-    transform: translate(0, -$height);
+    transform: translateY(-$height);
   }
   15% {
-    transform: translate(0, $height/2);
+    transform: translateY($height/2);
   }
   20% {
-    transform: translate(0, 0);
+    transform: translateY(0);
   }
   to {
-    transform: translate(0, 0);
+    transform: translateY(0);
   }
 }
 </style>
