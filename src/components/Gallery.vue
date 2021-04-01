@@ -63,13 +63,15 @@ figcaption {
   align-items: center;
 
   .informations {
+    margin: 0.8em;
   }
 
   .location {
     font-weight: bold;
     font-size: 1.1em;
     letter-spacing: 0.5px;
-    line-height: 1.8;
+    line-height: 1.4;
+    margin-bottom: 0.3em;
   }
 
   .date {
@@ -98,20 +100,20 @@ img {
 </style>
 
 <script>
-//import simpleParallax from "simple-parallax-js";
+import simpleParallax from "simple-parallax-js";
 
 export default {
   props: ["photos"],
   mounted() {
-    // if (process.isClient) {
-    //   var images = document.querySelectorAll(".gallery img");
-    //   new simpleParallax(images, {
-    //     orientation: "down",
-    //     scale: 1.22,
-    //     delay: 0,
-    //     customWrapper: ".parallax",
-    //   });
-    // }
+    if (process.isClient) {
+      var images = document.querySelectorAll(".gallery img");
+      new simpleParallax(images, {
+        orientation: "down",
+        scale: 1.3,
+        delay: 0,
+        customWrapper: ".parallax",
+      });
+    }
   },
   methods: {
     onClick: function (event, photo) {
