@@ -35,7 +35,7 @@ import Gallery from "~/components/Gallery.vue";
 
 export default {
   metaInfo: {
-    //title: "Mystagram",
+    title: "Photos",
   },
   components: {
     Gallery,

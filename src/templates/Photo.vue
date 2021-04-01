@@ -146,9 +146,12 @@ query($path: String) {
 <script>
 import Focus from "~/components/Focus.vue";
 import Layout from "~/layouts/Fullscreen.vue";
+
 export default {
-  metaInfo: {
-    //title: "Log",
+  metaInfo() {
+    return {
+      title: this.$page.photo.title,
+    };
   },
   data() {
     return {
@@ -157,7 +160,6 @@ export default {
   },
   computed: {
     index: function () {
-      console.log(this.getIndex(this.$page.photo.id));
       return this.getIndex(this.$page.photo.id);
     },
     previous: function () {
