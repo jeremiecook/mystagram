@@ -3,6 +3,14 @@
     <div class="container">
       <gallery :photos="$page.photos" />
     </div>
+    <footer>
+      <div class="container">
+        Ces photos sont soumises à une licence
+        <a href="https://creativecommons.org/licenses/by/4.0/deed.fr">
+          Creative Commons BY
+        </a>
+      </div>
+    </footer>
   </Layout>
 </template>
 
