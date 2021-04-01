@@ -2,6 +2,14 @@
   <Layout>
     <div :class="{ ready: ready }">
       <focus :photo="$page.photo" />
+      <div class="navigation">
+        <g-link :to="previous" class="previous"
+          ><img src="/images/previous.svg" alt="Photo précédente"
+        /></g-link>
+        <g-link :to="next" class="next"
+          ><img src="/images/next.svg" alt="Photo suivante"
+        /></g-link>
+      </div>
       <div class="actions">
         <a class="close" href="/">Toutes les photos</a>
       </div>
@@ -23,8 +31,6 @@ query($path: String) {
       node {
         id
         title
-        thumbnail: src (width: 500, height: 500, fit: cover)
-        date (format: "YYYY-MM-DD")
         path
       }
     }
@@ -48,6 +54,42 @@ query($path: String) {
   .ready & {
     opacity: 1;
     transition-delay: 1s;
+  }
+}
+
+.navigation {
+  a {
+    position: absolute;
+    display: block;
+    top: calc(50% - 2em);
+    background: #fff;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2em;
+    transition: all 0.4s ease;
+    transition-delay: 1s;
+    box-shadow: 1px 1px 3px rgba(#000, 0.2);
+
+    img {
+      display: block;
+      width: 0.8em;
+      margin: 1.2em;
+    }
+
+    &.previous {
+      left: -5em;
+      .ready & {
+        left: 0;
+      }
+    }
+
+    &.next {
+      right: -5em;
+      .ready & {
+        right: 0;
+      }
+    }
   }
 }
 
@@ -120,8 +162,29 @@ export default {
       ready: false,
     };
   },
+  computed: {
+    index: function () {
+      console.log(this.getIndex(this.$page.photo.id));
+      return this.getIndex(this.$page.photo.id);
+    },
+    previous: function () {
+      return this.$page.photos.edges[this.index - 1]
+        ? this.$page.photos.edges[this.index - 1].node.path
+        : this.$page.photos.edges[this.$page.photos.edges.length - 1].node.path;
+    },
+    next: function () {
+      return this.$page.photos.edges[this.index + 1]
+        ? this.$page.photos.edges[this.index + 1].node.path
+        : this.$page.photos.edges[0].node.path;
+    },
+  },
+
+  methods: {
+    getIndex: function (id) {
+      return this.$page.photos.edges.findIndex((photo) => photo.node.id == id);
+    },
+  },
   onImgLoad() {
-    console.log("Loaded!");
     this.ready = true;
   },
   mounted() {
