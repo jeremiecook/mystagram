@@ -1,8 +1,15 @@
+.fade-enter-active {
+  .gallery {
+    opacity: 0;
+  }
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2em;
   margin-top: 2em;
+  transition: opacity 2s ease;
 
   a {
     display: block;

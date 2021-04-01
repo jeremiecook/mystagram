@@ -39,13 +39,6 @@ query($path: String) {
 </page-query>
 
 <style lang="scss">
-.focus {
-  width: 100%;
-  img {
-    width: 100%;
-  }
-}
-
 .actions {
   text-align: center;
   opacity: 0;
@@ -96,8 +89,8 @@ query($path: String) {
 .close {
   color: #111;
   display: inline-block;
-  padding: 0.7em 1em;
-  font-size: 0.9rem;
+  padding: 0.9em 1.2em;
+  font-size: 0.8rem;
   transition: all 0.3s ease;
   position: relative;
   border-radius: 100px;

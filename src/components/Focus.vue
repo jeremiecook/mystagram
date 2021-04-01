@@ -32,13 +32,12 @@ $breakpoint: 600px;
   position: relative;
   //background: blue;
   //border: 1px solid Red;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
   transform: translateY(-10px);
   opacity: 0;
+  padding: 2em;
 
   transition: all 0.3s ease;
   transition-delay: 0;
@@ -67,6 +66,7 @@ figure {
   display: flex;
   position: relative;
   box-shadow: 0 2px 4px rgba(#000, 0.1);
+  margin: 0;
 
   // &:after {
   //   content: "";
@@ -87,7 +87,7 @@ figure {
 
 img {
   width: auto;
-  max-width: 100%;
+  max-width: calc(100% - 200px);
   max-height: 80vh;
 }
 
@@ -98,6 +98,7 @@ figcaption {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 0 0 200px;
 
   @media (max-width: $breakpoint) {
     width: 100%;
