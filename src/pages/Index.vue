@@ -13,7 +13,7 @@ query Photo {
       node {
         id
         title
-        thumbnail: src (width: 500, height: 500, fit: cover)
+        thumbnail: src (width: 350, height: 350, quality: 90, fit: cover)
         date (format: "YYYY-MM-DD")
         path
       }
