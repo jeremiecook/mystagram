@@ -54,7 +54,7 @@ query($path: String) {
   a {
     position: absolute;
     display: block;
-    top: calc(50% - 2em);
+    top: calc(50vh - 2em);
     background: #fff;
     text-align: center;
     text-decoration: none;

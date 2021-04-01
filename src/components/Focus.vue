@@ -89,6 +89,10 @@ img {
   width: auto;
   max-width: calc(100% - 200px);
   max-height: 80vh;
+
+  @media (max-width: $breakpoint) {
+    max-width: 100%;
+  }
 }
 
 figcaption {

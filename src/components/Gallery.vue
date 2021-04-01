@@ -68,7 +68,7 @@ figcaption {
   .location {
     font-weight: bold;
     font-size: 1.1em;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.5px;
     line-height: 1.8;
   }
 
