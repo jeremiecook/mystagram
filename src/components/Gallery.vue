@@ -100,12 +100,11 @@ img {
 </style>
 
 <script>
-import simpleParallax from "simple-parallax-js";
-
 export default {
   props: ["photos"],
   mounted() {
     if (process.isClient) {
+      var simpleParallax = require("simple-parallax-js");
       var images = document.querySelectorAll(".gallery img");
       new simpleParallax(images, {
         orientation: "down",
