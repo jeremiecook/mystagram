@@ -23,9 +23,8 @@
               >{{ photo.belongsTo.edges[0].node.FocalLength }}mm
             </li>
             <li v-if="photo.belongsTo.edges[0].node.ExposureTime">
-              <strong>Vitesse</strong>1/{{
-                1 / photo.belongsTo.edges[0].node.ExposureTime
-              }}s
+              <strong>Vitesse</strong
+              >{{ photo.belongsTo.edges[0].node.ExposureTime | exposure }}s
             </li>
             <li v-if="photo.belongsTo.edges[0].node.FNumber">
               <strong>Ouverture</strong> f/{{
@@ -54,7 +53,7 @@ export default {
   },
   methods: {
     ready() {
-      console.log(this.photo);
+      //console.log(this.photo);
       document.body.classList.add("ready");
     },
   },

@@ -95,24 +95,25 @@
 
 .exif {
   margin: 2em 1em 1em;
-  font-size: 0.9em;
   line-height: 1.5;
+  opacity: 0.8;
   //font-weight: bold;
   //color: rgba(#4865D9, .8);
-
   ul {
     padding: 0;
   }
 
   li {
     list-style: none;
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
 
   strong {
     font-weight: 600;
     display: inline-block;
     width: 6em;
+    //color: var(--color-primary);
+    //color: #999;
   }
 
   .model {
@@ -123,7 +124,9 @@
   .lens {
     font-size: 0.7rem;
     margin-bottom: 0.6em;
-    font-style: italic;
-    font-weight: 400;
+    //font-style: italic;
+    color: #999;
+    //color: var(--color-primary);
+    font-weight: 600;
   }
 }

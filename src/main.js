@@ -21,4 +21,8 @@ export default function(Vue, {}) {
   Vue.filter("date", function(value) {
     return moment(value).format("MMMM YYYY");
   });
+
+  Vue.filter("exposure", function(value) {
+    return "1/" + Math.round(1 / value);
+  });
 }

@@ -5,6 +5,7 @@
 ## Features
 - Instagram-like design
 - Photos in any format
+- EXIF display
 - Really fast
 - Markdown for content
 - Easy to hack
