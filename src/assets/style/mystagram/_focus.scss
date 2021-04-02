@@ -94,8 +94,8 @@
 }
 
 .exif {
-  margin-top: 2em;
-  font-size: 0.8em;
+  margin: 2em 1em 1em;
+  font-size: 0.9em;
   line-height: 1.5;
   //font-weight: bold;
   //color: rgba(#4865D9, .8);
@@ -106,7 +106,7 @@
 
   li {
     list-style: none;
-    font-size: 0.8rem;
+    font-size: 0.8em;
   }
 
   strong {
@@ -116,12 +116,13 @@
   }
 
   .model {
-    font-size: 1.1em;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 700;
   }
 
   .lens {
-    margin-bottom: 0.4em;
+    font-size: 0.7rem;
+    margin-bottom: 0.6em;
     font-style: italic;
     font-weight: 400;
   }

@@ -24,6 +24,22 @@ query($path: String) {
     src (width: 1000)
     title
     date (format: "YYYY-MM-DD")
+    belongsTo {
+      edges {
+        node {
+          ... on EXIF {
+            Make,
+            Model,
+            FNumber,
+            LensMake,
+            LensModel,
+            ISO,
+            FocalLength,
+            ExposureTime,
+          }
+        }
+      }
+    }
    }
    
    photos: allPhoto (sort:[{by: "date", order: DESC }, {by: "order", order: DESC}]) {

@@ -5,12 +5,45 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-module.exports = function (api) {
-  api.loadSource(({ addCollection }) => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-  })
+const exifr = require("exifr");
 
-  api.createPages(({ createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
-  })
-}
+module.exports = function(api) {
+  api.loadSource(async ({ addCollection, getCollection }) => {
+    const exif = addCollection("EXIF");
+    exif.addReference("photo", "Photo");
+    const photos = getCollection("Photo").data();
+
+    await Promise.all(
+      photos.map(async (photo) => {
+        const exifs = await exifr.parse(photo.src);
+        //console.log(photo.src);
+        //console.log(exifs);
+        exif.addNode({
+          ...exifs,
+          id: photo.id,
+          photo: photo.id,
+        });
+      })
+    );
+  });
+
+  // api.onCreateNode(async (options) => {
+  //   // if (options.internal.typeName !== "Photo") {
+  //   //   return null;
+  //   // }
+  //   // // modify the options directly
+  //   // options.model = await exifr.parse(
+  //   //   "/content/2015/Indonesie/mount-bromo-1.jpg"
+  //   // );
+  //   //options.title = "Hello";
+  //   //return { ...options };
+  // });
+};
+
+//import exifr from "exifr";
+// if (process.isServer) {
+//   console.log("hello");
+//   exifr
+//     .parse("/content/photos/2017/Cap-Vert/DSCF2684.jpg")
+//     .then((output) => console.log("Camera:", output.Make, output.Model));
+// }
